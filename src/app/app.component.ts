@@ -1,16 +1,17 @@
-import { Component, inject } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { CarService } from './car.service';
+import { UserComponent } from './user/user.component';
 import {
   ReactiveFormsModule,
   FormControl,
   FormGroup,
   Validators,
 } from '@angular/forms';
-import { UserComponent } from './user/user.component';
+
 @Component({
   selector: 'app-root',
   template: `
-    <p>{{ carService.getCars() }}</p>
+    <p>Car Listing: {{ display }}</p>
     <form [formGroup]="profileForm" (ngSubmit)="handleSubmit()">
       <label>
         Name
@@ -40,11 +41,17 @@ import { UserComponent } from './user/user.component';
   imports: [ReactiveFormsModule, UserComponent],
 })
 export class AppComponent {
-  carService = inject(CarService);
+  display = '';
+
+  constructor(private carService: CarService) {
+    this.display = this.carService.getCars().join(' ⭐️ ');
+  }
+
   profileForm = new FormGroup({
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
   });
+
   handleSubmit() {
     alert(this.profileForm.value.name + ' | ' + this.profileForm.value.email);
   }
