@@ -4,6 +4,7 @@ import { UserComponent } from './user/user.component';
 import { UpperCasePipe } from '@angular/common';
 import { LowerCasePipe } from '@angular/common';
 import { DecimalPipe, DatePipe, CurrencyPipe } from '@angular/common';
+import { ReversePipe } from './reverse.pipe';
 
 import {
   ReactiveFormsModule,
@@ -15,6 +16,7 @@ import {
 @Component({
   selector: 'app-root',
   template: `
+    Reverse Machine: {{ word | reverse }}
     <ul>
       <li>Number with "decimal" {{ num | number : '3.2-2' }}</li>
       <li>Date with "date" {{ birthday | date : 'medium' }}</li>
@@ -57,9 +59,11 @@ import {
     LowerCasePipe,
     DecimalPipe,
     CurrencyPipe,
+    ReversePipe,
   ],
 })
 export class AppComponent {
+  word = 'You are a champion';
   num = 103.1234;
   birthday = new Date(2023, 3, 2);
   cost = 4560.34;
