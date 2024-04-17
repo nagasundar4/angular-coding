@@ -1,26 +1,25 @@
 import { Component } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 
 @Component({
-  standalone: true,
   selector: 'app-user',
   template: `
     <p>Username: {{ username }}</p>
-    <p>Preferred Framework:</p>
-    <ul>
-      <li>
-        Static Image:
-        <img src="/assets/logo.svg" alt="Angular logo" />
-      </li>
-      <li>
-        Dynamic Image:
-        <img [src]="logoUrl" [alt]="logoAlt" />
-      </li>
-    </ul>
+    <p>Framework: {{ favoriteFramework }}</p>
+    <label for="framework">
+      Favorite Framework:
+      <input id="framework" type="text" [(ngModel)]="favoriteFramework" />
+    </label>
+    <button (click)="showFramework()">Show Framework</button>
   `,
-  imports: [],
+  standalone: true,
+  imports: [FormsModule],
 })
 export class UserComponent {
-  logoUrl = '/assets/logo.svg';
-  logoAlt = 'Angular logo';
-  username = 'Nagarajan';
+  favoriteFramework = '';
+  username = 'youngTech';
+
+  showFramework() {
+    alert(this.favoriteFramework);
+  }
 }

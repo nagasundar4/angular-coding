@@ -1,17 +1,33 @@
 import { Component } from '@angular/core';
-import { RouterOutlet } from '@angular/router';
+import { ReactiveFormsModule, FormControl, FormGroup } from '@angular/forms';
 import { UserComponent } from './user/user.component';
 @Component({
   selector: 'app-root',
-  standalone: true,
-  imports: [RouterOutlet, UserComponent],
   template: `
-    <div>
-      <app-user />
-    </div>
+    <form [formGroup]="profileForm" (ngSubmit)="handleSubmit()">
+      <label>
+        Name
+        <input type="text" formControlName="name" />
+      </label>
+      <label>
+        Email
+        <input type="email" formControlName="email" />
+      </label>
+      <button type="submit">Submit</button>
+    </form>
+    <h2>Profile Form</h2>
+    <p>Name: {{ profileForm.value.name }}</p>
+    <p>Email: {{ profileForm.value.email }}</p>
   `,
-  styleUrl: './app.component.css',
+  standalone: true,
+  imports: [ReactiveFormsModule, UserComponent],
 })
 export class AppComponent {
-  title = 'angular-coding';
+  profileForm = new FormGroup({
+    name: new FormControl(''),
+    email: new FormControl(''),
+  });
+  handleSubmit() {
+    alert(this.profileForm.value.name + ' | ' + this.profileForm.value.email);
+  }
 }
