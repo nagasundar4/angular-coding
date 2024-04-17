@@ -1,6 +1,9 @@
 import { Component, Inject } from '@angular/core';
 import { CarService } from './car.service';
 import { UserComponent } from './user/user.component';
+import { UpperCasePipe } from '@angular/common';
+import { LowerCasePipe } from '@angular/common';
+
 import {
   ReactiveFormsModule,
   FormControl,
@@ -11,6 +14,8 @@ import {
 @Component({
   selector: 'app-root',
   template: `
+    <p>{{ loudMessage | uppercase }}</p>
+    <p>{{ username | lowercase }}</p>
     <p>Car Listing: {{ display }}</p>
     <form [formGroup]="profileForm" (ngSubmit)="handleSubmit()">
       <label>
@@ -38,9 +43,11 @@ import {
     <p>Email: {{ profileForm.value.email }}</p>
   `,
   standalone: true,
-  imports: [ReactiveFormsModule, UserComponent],
+  imports: [ReactiveFormsModule, UserComponent, UpperCasePipe, LowerCasePipe],
 })
 export class AppComponent {
+  username = 'yOunGTECh';
+  loudMessage = 'we think you are doing great!';
   display = '';
 
   constructor(private carService: CarService) {
