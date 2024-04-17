@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { CarService } from './car.service';
 import {
   ReactiveFormsModule,
   FormControl,
@@ -9,6 +10,7 @@ import { UserComponent } from './user/user.component';
 @Component({
   selector: 'app-root',
   template: `
+    <p>{{ carService.getCars() }}</p>
     <form [formGroup]="profileForm" (ngSubmit)="handleSubmit()">
       <label>
         Name
@@ -38,6 +40,7 @@ import { UserComponent } from './user/user.component';
   imports: [ReactiveFormsModule, UserComponent],
 })
 export class AppComponent {
+  carService = inject(CarService);
   profileForm = new FormGroup({
     name: new FormControl('', Validators.required),
     email: new FormControl('', [Validators.required, Validators.email]),
