@@ -25,3 +25,16 @@ Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To u
 ## Further help
 
 To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+
+steps done:
+mkdir chatGpt
+cd chatGpt  
+ ng new angular-coding
+cd angular-coding
+git init
+code .
+created a remote repository in my github with the name angular-coding and made it public
+git remote add origin "https://github.com/nagasundar4/angular-coding.git"
+git add .
+git commit -m "Initial commit"
+git add README.md
